@@ -1,0 +1,57 @@
+<!--<p style = "text-align:center">Thank you for subscribing  to ... (green light), you will soon receive a confirmation mail.</p> -->
+<div class="topics">
+    <div *ngFor= "let topic of topics" class="topic" (click) = "topicClicked(topic)" customModal-trigger="subscribe-modal"> 
+        <div class="topic-content">
+             <div class="topic-image"   [ngStyle]="{'background-image':' url(' + topic?.image + ')'}">
+            <img [src] = "topic.image" [alt] = "topic.name"  style="visibility: hidden;">
+            </div>
+             
+            <h2>{{topic.name}}</h2>
+            <button  class="button-subscribe"   ><i class="fas fa-paper-plane"></i> Subscribe</button>
+        </div>
+    </div>
+</div> 
+ 
+<app-custom-modal elementId = 'subscribe-modal'>
+    <div class="">
+        <form #subscribeForm="ngForm" class="customForm"  (ngSubmit)="subscribe(subscribeForm)" autocomplete="off"  >
+            <div class="form-group"> 
+              
+                
+                <br>
+                <label class="form-label" for="mail">Email*</label>
+                <input  (ngModel)="mail" name="mail" id="mail" class="form-control" type="text" required>
+                
+            </div>
+            <em *ngIf="subscribeForm.controls.mail?.invalid && subscribeForm.controls.mail?.touched || formInvalid.mail">*Mail required</em>
+            <em *ngIf="mailError">*Email incorrect!   </em> 
+            <div class="button-container">
+                <button  type="submit">Send</button>
+            </div>
+            
+            </form>
+    </div>
+</app-custom-modal>
+
+
+
+
+
+<app-custom-modal elementId = 'confirmation-modal'>
+    <div class="mail-modal " >
+           <div class="alert alert-info">{{confirmationTitle}} !</div>
+          <div class="button-container confirm">
+                 <button (click)="confirm();">ok</button>
+          </div>
+      </div>
+</app-custom-modal>
+
+
+<app-custom-modal elementId = 'failed-modal'>
+    <div class="mail-modal " >
+           <div class="alert alert-info">{{failedTitle}} !</div>
+          <div class="button-container confirm">
+                 <button (click)="confirm();">ok</button>
+          </div>
+      </div>
+</app-custom-modal>
