@@ -33,7 +33,7 @@ Angular CLI: 9.1.4
 Node: 12.13.1 
 OS: win32 x64
 
-Also test with : 
+Also tested with : 
 
 npm: 6.14.4
 Node: 12.16.3
