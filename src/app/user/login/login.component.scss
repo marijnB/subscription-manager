@@ -1,17 +1,17 @@
-.customForm{
+.customForm {
     max-width: 20rem;
     margin-left: auto;
     margin-right: auto;
-    button{
+    button {
         padding: 0.8rem;
         margin-top: 1.5rem;
-        &.button-secondary{
+        &.button-secondary {
             margin-left: 2rem;
         }
-    } 
-    em{
+    }
+    em {
         font-size: 1.5rem;
         float: right;
         margin-top: 0.4rem;
-    } 
+    }
 }

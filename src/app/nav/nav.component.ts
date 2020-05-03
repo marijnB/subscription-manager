@@ -19,11 +19,11 @@ export class NavComponent implements OnInit {
     // Listen to events for future changes
     this.authService.userLoggedIn.subscribe(
       (value) => {
-        if (value){
-     
+        if (value) {
+
           this.isLoggedIn = value;
         }
-        else{
+        else {
           this.isLoggedIn = false;
 
         }
@@ -31,8 +31,8 @@ export class NavComponent implements OnInit {
       }
     );
   }
-  
-  logout(){
+
+  logout() {
     this.authService.logout();
   }
 

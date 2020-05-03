@@ -1,20 +1,21 @@
 <div id="main-container">
   <div class="page-top">
     <header>
-      <p><span>Sport</span>   Magazine Online</p> 
-      <p class="header-user" *ngIf = "isLoggedIn">
+      <p><span>Sport</span> Magazine Online</p>
+      <p class="header-user" *ngIf="isLoggedIn">
         Welcome {{currentUser}}
       </p>
     </header>
     <app-nav></app-nav>
     <div class='page-container'>
       <div class="page-container-inner">
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
     </div>
+  </div>
+
+  <footer>
+    <p>&copy; Marijn Beylemans 2020 - <span>Exercise BNP</span> </p>
+  </footer>
+  
 </div>
-
-<footer><p>&copy; Marijn Beylemans 2020   -  <span>Exercise BNP</span> </p></footer>
-</div>
-
-

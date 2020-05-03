@@ -1,107 +1,112 @@
 <h1>Subscription manager</h1>
 <div class="select-container">
-       <form #selectTopicForm="ngForm" class="customForm"   autocomplete="off"  >
+       <form #selectTopicForm="ngForm" class="customForm" autocomplete="off">
               <label class="form-label" for="userName">Select a topic : </label>
-       
+
               <select class="form-control" (change)="selectInputChanged($event)">
-              <option *ngFor = "let topic of topics" >{{topic.name}}</option>
-             
-            </select>
+                     <option *ngFor="let topic of topics">{{topic.name}}</option>
+
+              </select>
        </form>
-  </div> 
- 
- <h2>Subscribers of {{this.selectedTopic}}</h2>
- 
+</div>
+
+<h2>Subscribers of {{this.selectedTopic}}</h2>
+
 <hr>
 <div id="messages">
 
 </div>
 <div class="button-container-admin">
-      <p>Send mail to the subscribers of <span *ngIf ="selectedTopic==''">all topics</span> <span *ngIf ="selectedTopic!=''">{{selectedTopic.toLocaleLowerCase()}}</span></p> <button  customModal-trigger="mail-modal">Send mail </button>
+       <p>Send mail to the subscribers of <span *ngIf="selectedTopic==''">all topics</span> <span
+                     *ngIf="selectedTopic!=''">{{selectedTopic.toLocaleLowerCase()}}</span></p> <button
+              customModal-trigger="mail-modal">Send mail </button>
 </div>
 
- 
+
 <div class="admin-container">
-       <div class="subscriber" *ngFor = "let subscriber of subscribersSelectedTopic, let i = index" >
-              <p class="mail"><span>{{i+1}}.</span> {{subscriber.mail}}</p><button (click) = "deleteButtonCLick(subscriber)" customModal-trigger="delete-modal" >delete</button>
+       <div class="subscriber" *ngFor="let subscriber of subscribersSelectedTopic, let i = index">
+              <p class="mail"><span>{{i+1}}.</span> {{subscriber.mail}}</p><button
+                     (click)="deleteButtonCLick(subscriber)" customModal-trigger="delete-modal">delete</button>
        </div>
-       <div class="subscriber" *ngIf = "countSubscribers < 1 ">No subscribers for {{selectedTopic}}</div>
-<br>
+       <div class="subscriber" *ngIf="countSubscribers < 1 ">No subscribers for {{selectedTopic}}</div>
+       <br>
 
 
-<app-custom-modal elementId = 'mail-modal'>
-       <div class="mail-modal customForm">
-            <div class="alert alert-danger">You are about to send : ({{countSubscribers}}) subscriber<span *ngIf="countSubscribers > 1  || countSubscribers == 0">s</span> !</div>
-           <div class="form-group">
-               <label class="form-label" for="Email">select email-template</label>
-              <select class="form-control" name="" id="">
-                     <option *ngFor = "let template of templates" >{{template}}</option>
-              </select>
-           </div>
-           <div class="button-container">
-                  <button (click)="mailModalClicked();">Send</button>
-           </div>
-        
-       </div>
-</app-custom-modal>
+       <app-custom-modal elementId='mail-modal'>
+              <div class="mail-modal customForm">
+                     <div class="alert alert-danger">You are about to send : ({{countSubscribers}}) subscriber<span
+                                   *ngIf="countSubscribers > 1  || countSubscribers == 0">s</span> !</div>
+                     <div class="form-group">
+                            <label class="form-label" for="Email">select email-template</label>
+                            <select class="form-control" name="" id="">
+                                   <option *ngFor="let template of templates">{{template}}</option>
+                            </select>
+                     </div>
+                     <div class="button-container">
+                            <button (click)="mailModalClicked();">Send</button>
+                     </div>
 
-<app-custom-modal elementId = 'confirmation-mail-modal' >
-       <div class="mail-modal customForm" >
-              <div class="alert alert-info">mail sent to  ({{countSubscribers}}) subscriber<span *ngIf="countSubscribers > 1 || countSubscribers == 0">s</span> !</div>
-              <div class="subscriber-list">
-                     <div *ngFor = "let subscriber of subscribersSelectedTopic, let i = index" >
-                            <p class="mail">Mail sent to {{subscriber.mail}}</p>
-                            <br>
+              </div>
+       </app-custom-modal>
+
+       <app-custom-modal elementId='confirmation-mail-modal'>
+              <div class="mail-modal customForm">
+                     <div class="alert alert-info">mail sent to ({{countSubscribers}}) subscriber<span
+                                   *ngIf="countSubscribers > 1 || countSubscribers == 0">s</span> !</div>
+                     <div class="subscriber-list">
+                            <div *ngFor="let subscriber of subscribersSelectedTopic, let i = index">
+                                   <p class="mail">Mail sent to {{subscriber.mail}}</p>
+                                   <br>
+                            </div>
+                     </div>
+                     <div class="button-container confirm">
+                            <button (click)="confirmMailModalClicked();">ok</button>
                      </div>
               </div>
-             <div class="button-container confirm">
-                    <button (click)="confirmMailModalClicked();">ok</button>
-             </div>
-         </div>
-</app-custom-modal>
+       </app-custom-modal>
 
-<app-custom-modal elementId = 'failed-mail-modal' >
-       <div class="mail-modal customForm " >
-              <div class="alert alert-danger">mail not sent : {{selectedTopic}} has no subscribers ! </div>
-             
-          
-             <div class="button-container confirm">
-                    <button (click)="confirmMailModalClicked();">ok</button>
-             </div>
-          
-         </div>
-</app-custom-modal>
+       <app-custom-modal elementId='failed-mail-modal'>
+              <div class="mail-modal customForm ">
+                     <div class="alert alert-danger">mail not sent : {{selectedTopic}} has no subscribers ! </div>
 
-<app-custom-modal elementId = 'delete-modal' title="Delete subscriber">
-       <div class="mail-modal customForm">
-            <p >Do you want to delete {{subscriberToDelete.mail}}?</p>
-           
-           <div class="button-container twoButtons">
-                  <button (click)="deleteModalClicked();">yes</button>
-                  <button class="red" (click)="deleteModalCancel();">no</button>
-           </div>
-        
-       </div>
-</app-custom-modal>
 
-<app-custom-modal elementId = 'confirmation-delete-modal'  title="Delete subscriber">  
-       <div class="mail-modal customForm" >
-              <div class="alert alert-info">subscriber {{subscriberToDelete.mail}} deleted</div>
-              <div class="button-container confirm">
-                    <button (click)="confirmDeleteModalClicked();">ok</button>
-             </div>         
-       </div>
+                     <div class="button-container confirm">
+                            <button (click)="confirmMailModalClicked();">ok</button>
+                     </div>
 
-</app-custom-modal>
+              </div>
+       </app-custom-modal>
+
+       <app-custom-modal elementId='delete-modal' title="Delete subscriber">
+              <div class="mail-modal customForm">
+                     <p>Do you want to delete {{subscriberToDelete.mail}}?</p>
+
+                     <div class="button-container twoButtons">
+                            <button (click)="deleteModalClicked();">yes</button>
+                            <button class="red" (click)="deleteModalCancel();">no</button>
+                     </div>
+
+              </div>
+       </app-custom-modal>
+
+       <app-custom-modal elementId='confirmation-delete-modal' title="Delete subscriber">
+              <div class="mail-modal customForm">
+                     <div class="alert alert-info">subscriber {{subscriberToDelete.mail}} deleted</div>
+                     <div class="button-container confirm">
+                            <button (click)="confirmDeleteModalClicked();">ok</button>
+                     </div>
+              </div>
+
+       </app-custom-modal>
 
 
 
-<app-custom-modal elementId = 'failed-delete-modal'  title="Delete subscriber">            
-       <div class="mail-modal customForm" >
-              <div class="alert alert-danger">Could not delete subscriber {{subscriberToDelete.mail}} : not found ! </div>
-             <div class="button-container">
-                    <button (click)="confirmDeleteModalClicked();">ok</button>
-             </div>
-       </div>
-</app-custom-modal>
-
+       <app-custom-modal elementId='failed-delete-modal' title="Delete subscriber">
+              <div class="mail-modal customForm">
+                     <div class="alert alert-danger">Could not delete subscriber {{subscriberToDelete.mail}} : not found
+                            ! </div>
+                     <div class="button-container">
+                            <button (click)="confirmDeleteModalClicked();">ok</button>
+                     </div>
+              </div>
+       </app-custom-modal>

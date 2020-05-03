@@ -8,23 +8,22 @@ import { CommonModule } from '@angular/common';
 
 // module for sharing to all other modules ( to use the shared modal in user and homepage )
 @NgModule({
-    imports:[
-   
+    imports: [
         CommonModule
     ],
     declarations: [
         CustomModalComponent,
         customModalTriggerDirective
     ],
-    providers:[
+    providers: [
 
     ],
-    exports:[
+    exports: [
         CommonModule,
         CustomModalComponent,
         customModalTriggerDirective
     ]
 })
-export class sharedModule{
+export class SharedModule {
 
 }

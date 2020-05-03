@@ -14,7 +14,6 @@
         }
         li{ 
             margin: 2.6rem 2.6rem;
-
             a{
                 padding: 0rem;
                  color:#fefefe;
@@ -32,18 +31,15 @@
                      opacity: 0.9;
                  }
                  &:hover{
-                   
                      &:before{
                         transition: all 0.3s;
                         opacity: 0.8;
                         bottom: -0.8rem;
                      }
-                    
                  }
                  &:before{
-                    transition: all 0.3s;
-
                     content:'';
+                    transition: all 0.3s;
                     height:0.2rem;
                     width: 100%; 
                     background: white;
